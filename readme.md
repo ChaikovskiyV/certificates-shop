@@ -2,6 +2,7 @@ This application is the backend part of the web service for gift certificates.
 
 The application is created using technologies and tools such as Gradle, Spring(Data, Security), Spring Boot, Hibernate, SQL, REST.
 MySQL is used for data storage. The database stores data of entities such as gift certificate, tag, user, order.
+The Jacoco plugin is used in the "core" subproject to evaluate test coverage.
 
 Opportunities of the application.
 
