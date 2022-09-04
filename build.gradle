@@ -1,0 +1,35 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '2.6.7'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'war'
+}
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-parent:2.7.3'
+    implementation (project(':api')) {
+        exclude module: 'spring-boot-starter-tomcat'
+    }
+    implementation (project(':core')) {
+        exclude module: 'spring-boot-starter-tomcat'
+    }
+    implementation (project(':logging')) {
+        exclude module: 'spring-boot-starter-tomcat'
+    }
+}
+
+test {
+    useJUnitPlatform()
+}
+
+springBoot {
+    mainClass = 'com.epam.esm.configuration.ApplicationWebConfig'
+}
+
+war.enabled = false

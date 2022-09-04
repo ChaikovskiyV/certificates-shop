@@ -1,0 +1,5 @@
+rootProject.name = 'labproject'
+include ':core'
+include ':api'
+include ':logging'
+
