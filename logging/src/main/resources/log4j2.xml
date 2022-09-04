@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<?import org.apach.logging.log4j.core.comfig.Configuration?>
+<?import org.apach.logging.log4j.core.comfig.AppenderRef?>
+<?import org.apache.logging.log4j.core.appender.rolling.DefaultRolloverStrategy?>
+<?import org.apache.logging.log4j.core.appender.rolling.SizeBasedTriggeringPolicy?>
+<?import org.apache.logging.log4j.core.appender.rolling.TimeBasedTriggeringPolicy?>
+<?import org.apache.logging.log4j.core.layout.PatternLayout?>
+<?import java.io.Console?>
+<?import com.sun.tools.hat.internal.model.Root?>
+<Configuration status="error" monitorInterval="43200">
+    <Properties>
+        <property name="LOG_FOLDER">${rootDir}/log
+        </property>
+        <property name="pattern_cmd">%logger{5}-%msg%n</property>
+        <property name="pattern_file">%d{yyyy-MM-dd HH:mm:ss} %-5level %logger{5} - %msg%n</property>
+    </Properties>
+    <Appenders>
+        <Console name="STDOUT" target="SYSTEM_OUT">
+            <PatternLayout pattern="${pattern_cmd}"/>
+        </Console>
+        <RollingFile name="TxtFile" fileName="${LOG_FOLDER}/log.txt" append="true"
+                     filePattern="${LOG_FOLDER}/${date:yyyy-MM-dd_HH-mm}/%d{yyyy-MM-dd_HH-mm}_%i.txt">
+            <PatternLayout pattern="${pattern_file}"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="120 KB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="10"/>
+        </RollingFile>
+    </Appenders>
+
+    <Loggers>
+        <Root level="TRACE">
+            <AppenderRef ref="STDOUT" level="debug"/>
+            <AppenderRef ref="TxtFile" level="debug"/>
+        </Root>
+    </Loggers>
+</Configuration>
